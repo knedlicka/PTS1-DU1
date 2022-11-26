@@ -6,6 +6,6 @@ public interface IHand {
     public Optional<List<Card>> pickCards(List<HandPosition> positions);
     public Map<HandPosition, Card> removePickedCardsAndRedraw();
     public List<Card> returnPickedCards();
-    public boolean hasCardOfType(CardType type);
+    public Optional<HandPosition> hasCardOfType(CardType type);
     public List<Card> getCards();
 }

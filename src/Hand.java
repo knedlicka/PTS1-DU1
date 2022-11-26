@@ -55,13 +55,15 @@ public class Hand implements IHand{
     }
 
     // TODO podla diagramu to ma vratit HandPosition, preco?
-    public boolean hasCardOfType(CardType type) {
-        for (Card card : cards) {
-            if (card.getType().equals(type)) {
-                return true;
+    public Optional<HandPosition> hasCardOfType(CardType type) {
+        HandPosition hp;
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getType().equals(type)) {
+                hp = new HandPosition(i, playerIdx);
+                return Optional.of(hp);
             }
         }
-        return false;
+        return Optional.empty();
     }
 
     public List<Card> getCards() {

@@ -32,7 +32,9 @@ public class DrawingAndTrashPile {
         return draw;
     }
 
-    newTurn() {} //TODO co je toto?
+    void newTurn() {
+        discardedThisTurn = new ArrayList<>();
+    }
 
     List<Card> getCardsDiscardedThisTurn() {
         return discardedThisTurn;

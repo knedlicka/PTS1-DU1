@@ -6,4 +6,8 @@ public class Card {
         this.type = type;
         this.value = value;
     }
+
+    public CardType getType() {
+        return type;
+    }
 }

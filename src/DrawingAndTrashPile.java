@@ -3,7 +3,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class DrawingAndTrashPile {
+public class DrawingAndTrashPile implements IDrawingAndTrashPile{
     private List<Card> drawingPile;
     private List<Card> discardPile;
     private List<Card> discardedThisTurn;
@@ -13,7 +13,7 @@ public class DrawingAndTrashPile {
         this.discardPile = discardPile;
     }
 
-    List<Card> discardAndDraw(List<Card> discard){
+    public List<Card> discardAndDraw(List<Card> discard){
         discardPile.addAll(discard);
         discardedThisTurn = discard;
         int numberOfCardsToDraw = discard.size();
@@ -32,11 +32,11 @@ public class DrawingAndTrashPile {
         return draw;
     }
 
-    void newTurn() {
+    public void newTurn() {
         discardedThisTurn = new ArrayList<>();
     }
 
-    List<Card> getCardsDiscardedThisTurn() {
+    public List<Card> getCardsDiscardedThisTurn() {
         return discardedThisTurn;
     }
 

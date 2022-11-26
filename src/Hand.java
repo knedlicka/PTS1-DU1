@@ -1,8 +1,8 @@
 import java.util.*;
 
-public class Hand {
+public class Hand implements IHand{
     private Integer playerIdx;
-    private static DrawingAndTrashPile piles;
+    private static IDrawingAndTrashPile piles;
     private List<Card> cards;
 
     private List<Card> pickedCards;
@@ -15,7 +15,7 @@ public class Hand {
         this.positionsOfPickedCards = new ArrayList<>();
     }
 
-    Optional<List<Card>> pickCards(List<HandPosition> positions) {
+    public Optional<List<Card>> pickCards(List<HandPosition> positions) {
         List<Card> newlyPickedCards = new ArrayList<>();
         for(HandPosition x : positions) {
             int index = x.getCardIndex();
@@ -31,7 +31,7 @@ public class Hand {
         return Optional.of(newlyPickedCards);
     }
 
-    Map<HandPosition, Card> removePickedCardsAndRedraw() {
+    public Map<HandPosition, Card> removePickedCardsAndRedraw() {
         List<Card> draw = piles.discardAndDraw(pickedCards);
         int drawIndex = 0;
         for(HandPosition x : positionsOfPickedCards) {
@@ -50,12 +50,12 @@ public class Hand {
         return cardArr;
     }
 
-    List<Card> returnPickedCards() {
+    public List<Card> returnPickedCards() {
         return pickedCards;
     }
 
     // TODO podla diagramu to ma vratit HandPosition, preco?
-    boolean hasCardOfType(CardType type) {
+    public boolean hasCardOfType(CardType type) {
         for (Card card : cards) {
             if (card.getType().equals(type)) {
                 return true;
@@ -64,7 +64,7 @@ public class Hand {
         return false;
     }
 
-    List<Card> getCards() {
+    public List<Card> getCards() {
         return cards;
     }
 }

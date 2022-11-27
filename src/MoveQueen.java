@@ -9,31 +9,25 @@ public class MoveQueen implements IMoveQueen{
         this.playerIndex = playerIndex;
     }
 
-    public boolean play(SleepingQueenPosition targetQueen) {
+    private boolean moveQueen(Position targetQueen, QueenCollection from, QueenCollection to) {
         Queen queen;
         try {
-            queen = sleepingQueens.getQueens().get(targetQueen);
+            queen = from.getQueens().get(targetQueen);
         } catch (Exception e) {
             return false;
         }
-        if(sleepingQueens.removeQueen(targetQueen).isEmpty()) {
+        if(from.removeQueen(targetQueen).isEmpty()) {
             return false;
         }
-        awokenQueens.addQueen(queen);
+        to.addQueen(queen);
         return true;
     }
 
+    public boolean play(SleepingQueenPosition targetQueen) {
+        return moveQueen(targetQueen, sleepingQueens, awokenQueens);
+    }
+
     public boolean play(AwokenQueenPosition targetQueen) {
-        Queen queen;
-        try {
-            queen = awokenQueens.getQueens().get(targetQueen);
-        } catch (Exception e) {
-            return false;
-        }
-        if(awokenQueens.removeQueen(targetQueen).isEmpty()) {
-            return false;
-        }
-        sleepingQueens.addQueen(queen);
-        return true;
+        return moveQueen(targetQueen, awokenQueens, sleepingQueens);
     }
 }

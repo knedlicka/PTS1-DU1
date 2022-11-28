@@ -23,11 +23,15 @@ public class MoveQueen implements IMoveQueen{
         return true;
     }
 
-    public boolean play(SleepingQueenPosition targetQueen) {
-        return moveQueen(targetQueen, sleepingQueens, awokenQueens);
-    }
-
-    public boolean play(AwokenQueenPosition targetQueen) {
+    public boolean play(Position targetQueen) {
+        if(targetQueen instanceof SleepingQueenPosition) {
+            return moveQueen(targetQueen, sleepingQueens, awokenQueens);
+        }
+        if(targetQueen instanceof AwokenQueenPosition) {
         return moveQueen(targetQueen, awokenQueens, sleepingQueens);
+        }
+        throw new IllegalArgumentException(
+            "targetQueen position should be of type SleepingQueenPosition or AwokenQueenPosition"
+        );
     }
 }

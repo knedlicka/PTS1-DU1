@@ -10,4 +10,8 @@ public class Card {
     public CardType getType() {
         return type;
     }
+
+    public Integer getValue() {
+        return value;
+    }
 }

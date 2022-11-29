@@ -1,12 +1,21 @@
-public class MoveQueen implements IMoveQueen{
-    private AwokenQueens awokenQueens;
-    private static SleepingQueens sleepingQueens;
-    private Integer playerIndex;
+import java.util.List;
 
-    public MoveQueen(AwokenQueens awokenQueens, SleepingQueens sleepingQueens, Integer playerIndex) {
-        this.awokenQueens = awokenQueens;
+public class MoveQueen implements IMoveQueen{
+    private static List<AwokenQueens> awokenQueensOfPlayers;
+    private static SleepingQueens sleepingQueens;
+    private final int playerIndex;
+    private final CardType causedBy;
+
+    public MoveQueen(
+            List<AwokenQueens> awokenQueensOfPlayers,
+            SleepingQueens sleepingQueens,
+            int playerIndex,
+            CardType causedBy
+    ) {
+        MoveQueen.awokenQueensOfPlayers = awokenQueensOfPlayers;
         MoveQueen.sleepingQueens = sleepingQueens;
         this.playerIndex = playerIndex;
+        this.causedBy = causedBy;
     }
 
     private boolean moveQueen(Position targetQueen, QueenCollection from, QueenCollection to) {
@@ -25,13 +34,24 @@ public class MoveQueen implements IMoveQueen{
 
     public boolean play(Position targetQueen) {
         if(targetQueen instanceof SleepingQueenPosition) {
-            return moveQueen(targetQueen, sleepingQueens, awokenQueens);
+            if(causedBy != CardType.King) {
+                throw new IllegalArgumentException("Not a king");
+            }
+            return moveQueen(targetQueen, sleepingQueens, awokenQueensOfPlayers.get(playerIndex));
         }
         if(targetQueen instanceof AwokenQueenPosition) {
-        return moveQueen(targetQueen, awokenQueens, sleepingQueens);
+            if(causedBy == CardType.SleepingPotion) {
+                return moveQueen(targetQueen, awokenQueensOfPlayers.get(playerIndex), sleepingQueens);
+            } else if(causedBy == CardType.Knight) {
+                return moveQueen(
+                    targetQueen,
+                    awokenQueensOfPlayers.get(((AwokenQueenPosition) targetQueen).getPlayerIndex()),
+                    awokenQueensOfPlayers.get(playerIndex)
+                );
+            }
         }
         throw new IllegalArgumentException(
-            "targetQueen position should be of type SleepingQueenPosition or AwokenQueenPosition"
+            "Illegal combination of causedBy and QueenPosition"
         );
     }
 }

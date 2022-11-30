@@ -4,10 +4,9 @@ public class Player implements IPlayer {
     private Integer playerIndex;
     private final IHand hand;
     private final AwokenQueens awokenQueens;
-    private SleepingQueens sleepingQueens;
     private final List<Map<CardType, EvaluateAttack>> evaluateAttackTable;
-    private EvaluateKing evaluateKing;
-    private EvaluateNumberedCards evaluateNumberedCards;
+    private final EvaluateKing evaluateKing;
+    private final EvaluateNumberedCards evaluateNumberedCards;
 
     enum PlayType {
         PlaySleepingPotion,
@@ -25,7 +24,6 @@ public class Player implements IPlayer {
     ) {
         this.hand = hand;
         this.awokenQueens = awokenQueens;
-        this.sleepingQueens = sleepingQueens;
         this.evaluateAttackTable = evaluateAttackTable;
         this.evaluateKing = new EvaluateKing(awokenQueens, hand);
         this.evaluateNumberedCards = new EvaluateNumberedCards(hand, playerIndex);
@@ -96,7 +94,7 @@ public class Player implements IPlayer {
         PlayType playType = determinePlayType(cards);
 
         int opponentIndex = -1;
-        Position targetQueen = new AwokenQueenPosition(-1, -1);
+        Position targetQueen = new AwokenQueenPosition(-1, -1); //nevadi ze toto je AwokenQueenPosition aj ked potom sa tam priradi SleepingQueenPosition
         HandPosition handPosition = new HandPosition(-1, -1);
         List<Card> numberedCards = new ArrayList<>();
         List<Card> cardsOnHand = hand.getCards();
@@ -130,7 +128,9 @@ public class Player implements IPlayer {
                         .get(CardType.Knight)
                         .play(targetQueen, opponentIndex);
             case PlayKing:
-                return evaluateKing.play(handPosition, (SleepingQueenPosition)targetQueen);
+                if (targetQueen instanceof SleepingQueenPosition) {
+                    return evaluateKing.play(handPosition, (SleepingQueenPosition)targetQueen);
+                }
             case PlayNumber:
                 return evaluateNumberedCards.play(numberedCards);
             default:
@@ -138,20 +138,19 @@ public class Player implements IPlayer {
         }
     }
 
-//    @Override
-//    public PlayerState getPlayerState() {
-//        Map<Integer, Optional<Card>> playerCards = new HashMap<>();
-//        Map<Integer, Queen> playerAwokenQueens = new HashMap<>();
-//        int position = 0;
-//        for(Card card : hand.getCards()) {
-//            playerCards.put(position, Optional.of(card));
-//            position++;
-//        }
-//        for(Position index : awokenQueens.keySet()) { // TODO toto nie je pekne
-//            if(index.getCardIndex().equals(playerIndex)) {
-//                playerAwokenQueens.put(index.getCardIndex(), awokenQueens.get(index));
-//            }
-//        }
-//        return new PlayerState(cardsL, awokenQueensL);
-//    }
+    @Override
+    public PlayerState getPlayerState() {
+        Map<Integer, Optional<Card>> playerCards = new HashMap<>();
+        Map<Integer, Queen> playerAwokenQueens = new HashMap<>();
+        int index = 0;
+        for(Card card : hand.getCards()) {
+            playerCards.put(index, Optional.of(card));
+            index++;
+        }
+        List<Queen> queens = awokenQueens.getListOfQueens();
+        for(int i = 0; i < queens.size(); i++) {
+            playerAwokenQueens.put(i, queens.get(i));
+        }
+        return new PlayerState(playerCards, playerAwokenQueens);
+    }
 }

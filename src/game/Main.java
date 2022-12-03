@@ -6,5 +6,7 @@ public class Main {
         drawingStrategy1Tests.runTests();
         DrawingStrategy2Tests drawingStrategy2Tests = new DrawingStrategy2Tests();
         drawingStrategy2Tests.runTests();
+        HandTests handTests = new HandTests();
+        handTests.runTests();
     }
 }

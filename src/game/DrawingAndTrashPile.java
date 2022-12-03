@@ -16,10 +16,7 @@ public class DrawingAndTrashPile implements IDrawingAndTrashPile{
     }
 
     public List<Card> discardAndDraw(List<Card> discard){
-        discardPile.addAll(discard);
-        discardedThisTurn = discard;
-        int numberOfCardsToDraw = discard.size();
-        return drawCards(numberOfCardsToDraw);
+        return drawingStrategy.discardAndDraw(discard, drawingPile, discardPile, new java.util.Random());
     }
 
     public void newTurn() {

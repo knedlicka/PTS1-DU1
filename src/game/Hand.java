@@ -3,9 +3,9 @@ package game;
 import java.util.*;
 
 public class Hand implements IHand{
-    private Integer playerIdx;
+    private final Integer playerIdx;
     private static IDrawingAndTrashPile piles;
-    private List<Card> cards;
+    private final List<Card> cards;
 
     private List<Card> pickedCards;
     private List<HandPosition> positionsOfPickedCards;
@@ -57,7 +57,6 @@ public class Hand implements IHand{
         return pickedCards;
     }
 
-    // TODO podla diagramu to ma vratit game.HandPosition, preco?
     public Optional<HandPosition> hasCardOfType(CardType type) {
         HandPosition hp;
         for (int i = 0; i < cards.size(); i++) {

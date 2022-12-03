@@ -7,10 +7,10 @@ public class Game implements IGame {
     private final SleepingQueens sleepingQueens;
     private int playerOnTurn;
 
-    public Game(int numberOfPlayers, List<Card> drawingPile, List<Queen> queensSleeping) {
+    public Game(int numberOfPlayers, List<Card> drawingPile, List<Queen> queensSleeping, IDrawingStrategy drawingStrategy) {
         this.numberOfPlayers = numberOfPlayers;
         playerOnTurn = 0;
-        drawingAndTrashPile = new DrawingAndTrashPile(drawingPile, new ArrayList<>());
+        drawingAndTrashPile = new DrawingAndTrashPile(drawingPile, new ArrayList<>(), drawingStrategy);
         sleepingQueens = new SleepingQueens(queensSleeping);
         List<Hand> hands = new ArrayList<>();
         for (int playerIndex = 0; playerIndex < numberOfPlayers; playerIndex++) {

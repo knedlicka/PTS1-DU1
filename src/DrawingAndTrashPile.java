@@ -4,32 +4,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class DrawingAndTrashPile implements IDrawingAndTrashPile{
-    private List<Card> drawingPile;
+    private final List<Card> drawingPile;
     private List<Card> discardPile;
     private List<Card> discardedThisTurn;
 
-    public DrawingAndTrashPile(List<Card> drawingPile, List<Card> discardPile) {
+    private IDrawingStrategy drawingStrategy;
+    public DrawingAndTrashPile(List<Card> drawingPile, List<Card> discardPile, IDrawingStrategy drawingStrategy) {
         this.drawingPile = drawingPile;
         this.discardPile = discardPile;
+        this.drawingStrategy = drawingStrategy;
     }
 
     public List<Card> discardAndDraw(List<Card> discard){
-        discardPile.addAll(discard);
+        discardPile.addAll(discard)
         discardedThisTurn = discard;
         int numberOfCardsToDraw = discard.size();
-        List<Card> draw = new ArrayList<>();
-        while(numberOfCardsToDraw > 0) {
-            if(drawingPile.isEmpty()) {
-                Collections.shuffle(discardPile);
-                drawingPile.addAll(discardPile);
-                discardPile = new ArrayList<>();
-            }
-            int last = drawingPile.size() - 1;
-            draw.add(drawingPile.get(last));
-            drawingPile.remove(last);
-            numberOfCardsToDraw--;
-        }
-        return draw;
+        return drawCards(numberOfCardsToDraw);
     }
 
     public void newTurn() {
@@ -41,18 +31,7 @@ public class DrawingAndTrashPile implements IDrawingAndTrashPile{
     }
 
     public List<Card> drawCards(int numberOfCardsToDraw) {
-        List<Card> draw = new ArrayList<>();
-        while(numberOfCardsToDraw > 0) {
-            if(drawingPile.isEmpty()) {
-                Collections.shuffle(discardPile);
-                drawingPile.addAll(discardPile);
-                discardPile = new ArrayList<>();
-            }
-            int last = drawingPile.size() - 1;
-            draw.add(drawingPile.get(last));
-            drawingPile.remove(last);
-            numberOfCardsToDraw--;
-        }
+        List<Card> draw = drawingStrategy.draw(this.drawingPile, this.discardPile, numberOfCardsToDraw);
         return draw;
     }
 }

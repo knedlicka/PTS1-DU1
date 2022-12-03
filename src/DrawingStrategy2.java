@@ -24,5 +24,6 @@ public class DrawingStrategy2 implements IDrawingStrategy{
             drawingPile.remove(1);
             numberOfCardsToDraw--;
         }
+        return draw;
     }
 }

@@ -8,5 +8,7 @@ public class Main {
         drawingStrategy2Tests.runTests();
         HandTests handTests = new HandTests();
         handTests.runTests();
+        SleepingQueensTests sleepingQueensTests = new SleepingQueensTests();
+        sleepingQueensTests.runTests();
     }
 }

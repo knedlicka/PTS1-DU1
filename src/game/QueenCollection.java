@@ -13,7 +13,7 @@ public abstract class QueenCollection {
         queens.add(queen);
     }
 
-    public Optional<Queen> removeQueen(Position position) { // TODO podla diagramu by position malo byt game.SleepingQueenPosition
+    public Optional<Queen> removeQueen(Position position) {
         int cardIndex = position.getCardIndex();
         if(0 < cardIndex && queens.size() > cardIndex) {
             Queen queen = queens.get(cardIndex);

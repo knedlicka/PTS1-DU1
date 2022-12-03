@@ -40,5 +40,19 @@ public class DrawingAndTrashPile implements IDrawingAndTrashPile{
         return discardedThisTurn;
     }
 
-
+    public List<Card> drawCards(int numberOfCardsToDraw) {
+        List<Card> draw = new ArrayList<>();
+        while(numberOfCardsToDraw > 0) {
+            if(drawingPile.isEmpty()) {
+                Collections.shuffle(discardPile);
+                drawingPile.addAll(discardPile);
+                discardPile = new ArrayList<>();
+            }
+            int last = drawingPile.size() - 1;
+            draw.add(drawingPile.get(last));
+            drawingPile.remove(last);
+            numberOfCardsToDraw--;
+        }
+        return draw;
+    }
 }

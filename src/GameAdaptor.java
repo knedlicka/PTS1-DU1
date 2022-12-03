@@ -4,9 +4,9 @@ public class GameAdaptor implements IGamePlayer{
     private final IGame game;
     private final Map<String, Integer> playerNames;
     private final GameObservable observable;
-    public GameAdaptor(Integer numberOfPlayers, List<String> playerNames, GameObservable observable) {
+    public GameAdaptor(Integer numberOfPlayers, List<String> playerNames, GameObservable observable, IDrawingStrategy drawingStrategy) {
         IDealer dealer = new Dealer();
-        game = new Game(numberOfPlayers, dealer.getDrawingPile(), dealer.getQueensSleeping());
+        game = new Game(numberOfPlayers, dealer.getDrawingPile(), dealer.getQueensSleeping(), drawingStrategy);
         this.playerNames = new HashMap<>();
         for(int i = 0; i < playerNames.size(); i++){
             this.playerNames.put(playerNames.get(i), i);

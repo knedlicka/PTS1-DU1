@@ -153,4 +153,16 @@ public class Player implements IPlayer {
         }
         return new PlayerState(playerCards, playerAwokenQueens);
     }
+
+    public Hand getHand() {
+        return (Hand)hand;
+    }
+
+    public Integer getPlayerIndex(){
+        return playerIndex;
+    }
+
+    public AwokenQueens getAwokenQueens() {
+        return awokenQueens;
+    }
 }

@@ -8,11 +8,12 @@ public class Hand implements IHand{
     private List<Card> pickedCards;
     private List<HandPosition> positionsOfPickedCards;
 
-    public Hand(Integer playerIdx, List<Card> cards) {
+    public Hand(Integer playerIdx, List<Card> cards, IDrawingAndTrashPile piles) {
         this.playerIdx = playerIdx;
         this.cards = cards;
         this.pickedCards = new ArrayList<>();
         this.positionsOfPickedCards = new ArrayList<>();
+        Hand.piles = piles;
     }
 
     public Optional<List<Card>> pickCards(List<HandPosition> positions) {

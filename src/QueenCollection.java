@@ -4,7 +4,7 @@ public abstract class QueenCollection {
     protected List<Queen> queens;
 
     public QueenCollection() {
-        queens = new ArrayList<>();
+        this.queens = new ArrayList<>();
     }
 
     public void addQueen(Queen queen) {

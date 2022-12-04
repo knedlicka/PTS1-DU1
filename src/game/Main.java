@@ -12,5 +12,7 @@ public class Main {
         sleepingQueensTests.runTests();
         AwokenQueensTests awokenQueensTests = new AwokenQueensTests();
         awokenQueensTests.runTests();
+        MoveQueenTests moveQueenTests = new MoveQueenTests();
+        moveQueenTests.runTests();
     }
 }

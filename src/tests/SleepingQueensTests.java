@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static tests.TestUtils.containsAll;
+
 public class SleepingQueensTests {
     SleepingQueens sleepingQueens;
     void createSleepingQueens() {
@@ -18,25 +20,6 @@ public class SleepingQueensTests {
         sleepingQueens = new SleepingQueens(queens);
     }
 
-    boolean mapContainsAnotherMap(Map<Position, Queen> a, Map<Position, Queen> b) {
-        for(Map.Entry<Position, Queen> entryA : a.entrySet()) {
-            boolean contains = false;
-            for(Map.Entry<Position, Queen> entryB: b.entrySet()) {
-                if(entryA.getKey().equals(entryB.getKey()) && entryA.getValue().equals(entryB.getValue())) {
-                    contains = true;
-                    break;
-                }
-            }
-            if(!contains) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    boolean containsAll(Map<Position, Queen> a, Map<Position, Queen> b) {
-        return mapContainsAnotherMap(a, b) && mapContainsAnotherMap(b, a);
-    }
     void testRemoveQueen() {
         createSleepingQueens();
         Position position = new SleepingQueenPosition(1);

@@ -59,7 +59,6 @@ public class Game implements IGame {
             players.add(new Player(
                     hands.get(playerIdx),
                     allPlayersAwokenQueens.get(playerIdx),
-                    sleepingQueens,
                     playersEvaluateAttackTable
             ));
         }

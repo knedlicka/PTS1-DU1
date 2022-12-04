@@ -2,13 +2,13 @@ package game;
 
 import java.util.*;
 
-public class Hand implements IHand{
+public class Hand implements IHand {
     private final Integer playerIdx;
     private static IDrawingAndTrashPile piles;
     private final List<Card> cards;
 
     private List<Card> pickedCards;
-    private List<HandPosition> positionsOfPickedCards;
+    private List<IPosition> positionsOfPickedCards;
 
     public Hand(Integer playerIdx, List<Card> cards, IDrawingAndTrashPile piles) {
         this.playerIdx = playerIdx;
@@ -18,9 +18,10 @@ public class Hand implements IHand{
         Hand.piles = piles;
     }
 
-    public Optional<List<Card>> pickCards(List<HandPosition> positions) {
+    @Override
+    public Optional<List<Card>> pickCards(List<IPosition> positions) {
         List<Card> newlyPickedCards = new ArrayList<>();
-        for(HandPosition x : positions) {
+        for(IPosition x : positions) {
             int index = x.getCardIndex();
             try {
                 Card c = cards.get(index);
@@ -34,10 +35,11 @@ public class Hand implements IHand{
         return Optional.of(newlyPickedCards);
     }
 
-    public Map<HandPosition, Card> removePickedCardsAndRedraw() {
+    @Override
+    public Map<IPosition, Card> removePickedCardsAndRedraw() {
         List<Card> draw = piles.discardAndDraw(pickedCards);
         int drawIndex = 0;
-        for(HandPosition x : positionsOfPickedCards) {
+        for(IPosition x : positionsOfPickedCards) {
             int index = x.getCardIndex();
             cards.set(index, draw.get(drawIndex));
             drawIndex++;
@@ -45,7 +47,7 @@ public class Hand implements IHand{
         pickedCards = new ArrayList<>();
         positionsOfPickedCards = new ArrayList<>();
 
-        Map<HandPosition, Card> cardArr = new HashMap<>();
+        Map<IPosition, Card> cardArr = new HashMap<>();
         for(int i = 0; i < cards.size(); i++) {
             HandPosition handPosition = new HandPosition(i, playerIdx);
             cardArr.put(handPosition, cards.get(i));
@@ -57,7 +59,8 @@ public class Hand implements IHand{
         return pickedCards;
     }
 
-    public Optional<HandPosition> hasCardOfType(CardType type) {
+    @Override
+    public Optional<IPosition> hasCardOfType(CardType type) {
         HandPosition hp;
         for (int i = 0; i < cards.size(); i++) {
             if (cards.get(i).getType().equals(type)) {

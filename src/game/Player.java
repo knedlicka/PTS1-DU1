@@ -21,7 +21,6 @@ public class Player implements IPlayer {
     public Player(
             IHand hand,
             IQueenCollection awokenQueens,
-            IQueenCollection sleepingQueens,
             List<Map<CardType, IEvaluateAttack>> evaluateAttackTable
     ) {
         this.hand = hand;
@@ -117,8 +116,6 @@ public class Player implements IPlayer {
            }
         }
         switch (playType) {
-            case Invalid:
-                return false;
             case PlaySleepingPotion:
                 return evaluateAttackTable
                     .get(opponentIndex)

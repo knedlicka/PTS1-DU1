@@ -40,7 +40,7 @@ public class EvaluateNumberedCards implements IEvaluateNumberedCards{
 
     public boolean play(List<Card> cards) { // TODO nemusi vyhodit kartu na tej pozicii, ktoru si vybral hrac, ak ma na ruke aspon dve rovnake karty
         if (canBeDiscarded(cards)) {
-            List<HandPosition> handPositions = new ArrayList<>();
+            List<IPosition> handPositions = new ArrayList<>();
             List<Card> handCards = hand.getCards();
             for (Card card : cards) {
                 for (int i = 0; i < handCards.size(); i++) {

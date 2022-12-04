@@ -7,10 +7,10 @@ import java.util.*;
 public class HandTests {
     private Hand hand;
 
-    boolean mapContainsAnotherMap(Map<HandPosition, Card> a, Map<HandPosition, Card> b) {
-        for(Map.Entry<HandPosition, Card> entryA : a.entrySet()) {
+    boolean mapContainsAnotherMap(Map<IPosition, Card> a, Map<IPosition, Card> b) {
+        for(Map.Entry<IPosition, Card> entryA : a.entrySet()) {
             boolean contains = false;
-            for(Map.Entry<HandPosition, Card> entryB: b.entrySet()) {
+            for(Map.Entry<IPosition, Card> entryB: b.entrySet()) {
                 if(entryA.getKey().equals(entryB.getKey()) && entryA.getValue().equals(entryB.getValue())) {
                     contains = true;
                     break;
@@ -23,7 +23,7 @@ public class HandTests {
         return true;
     }
 
-    boolean containsAll(Map<HandPosition, Card> a, Map<HandPosition, Card> b) {
+    boolean containsAll(Map<IPosition, Card> a, Map<IPosition, Card> b) {
         return mapContainsAnotherMap(a, b) && mapContainsAnotherMap(b, a);
     }
 
@@ -49,7 +49,7 @@ public class HandTests {
     }
     void testPickCards() {
         createHand();
-        List<HandPosition> positions = new ArrayList<>();
+        List<IPosition> positions = new ArrayList<>();
         positions.add(new HandPosition(0, 0));
         positions.add(new HandPosition(2, 0));
         positions.add(new HandPosition(4, 0));
@@ -67,13 +67,13 @@ public class HandTests {
 
     void testRemovePickedCardsAndRedraw() {
         createHand();
-        List<HandPosition> positions = new ArrayList<>();
+        List<IPosition> positions = new ArrayList<>();
         positions.add(new HandPosition(0, 0));
         positions.add(new HandPosition(2, 0));
         positions.add(new HandPosition(4, 0));
         hand.pickCards(positions);
-        Map<HandPosition, Card> actual = hand.removePickedCardsAndRedraw();
-        Map<HandPosition, Card> expected = new java.util.HashMap<>();
+        Map<IPosition, Card> actual = hand.removePickedCardsAndRedraw();
+        Map<IPosition, Card> expected = new java.util.HashMap<>();
         expected.put(new HandPosition(0, 0), new Card(CardType.Number, 6));
         expected.put(new HandPosition(1, 0), new Card(CardType.Number, 2));
         expected.put(new HandPosition(2, 0), new Card(CardType.Number, 7));
@@ -89,8 +89,8 @@ public class HandTests {
 
     void testHasCardOfType() {
         createHand();
-        Optional<HandPosition> actual1 = hand.hasCardOfType(CardType.Number);
-        Optional<HandPosition> actual2 = hand.hasCardOfType(CardType.King);
+        Optional<IPosition> actual1 = hand.hasCardOfType(CardType.Number);
+        Optional<IPosition> actual2 = hand.hasCardOfType(CardType.King);
 
         if(actual1.isEmpty() || !actual2.isEmpty()) {
             System.err.println("    [FAILED] testHasCardOfType");

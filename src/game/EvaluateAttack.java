@@ -17,16 +17,15 @@ public class EvaluateAttack implements IEvaluateAttack{
     }
 
     public boolean play(IPosition targetQueen, Integer targetPlayerIndex) {
-        Optional<HandPosition> hp = targetHand.hasCardOfType(defenseCardType);
+        Optional<IPosition> hp = targetHand.hasCardOfType(defenseCardType);
         if(hp.isEmpty()) { // uskutocni sa utok
             moveQueen.play(targetQueen);
             return true;
         }
-        List<HandPosition> pick = new ArrayList<>();
+        List<IPosition> pick = new ArrayList<>();
         pick.add(hp.get());
         targetHand.pickCards(pick);
         targetHand.removePickedCardsAndRedraw();
         return false; // super sa ubranil (targetHand sa ubranila)
     }
-
 }

@@ -25,7 +25,7 @@ public class EvaluateKing implements IEvaluateKing {
             return false;
         }
 
-        List<HandPosition> handPositions = new ArrayList<>();
+        List<IPosition> handPositions = new ArrayList<>();
         handPositions.add(handPosition);
         hand.pickCards(handPositions);
         hand.removePickedCardsAndRedraw();

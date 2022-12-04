@@ -16,7 +16,7 @@ public class EvaluateAttack {
         this.moveQueen = moveQueen;
     }
 
-    boolean play(Position targetQueen, Integer targetPlayerIndex) {
+    public boolean play(Position targetQueen, Integer targetPlayerIndex) {
         Optional<HandPosition> hp = targetHand.hasCardOfType(defenseCardType);
         if(hp.isEmpty()) { // uskutocni sa utok
             moveQueen.play(targetQueen);

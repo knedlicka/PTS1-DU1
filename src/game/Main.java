@@ -14,5 +14,7 @@ public class Main {
         awokenQueensTests.runTests();
         MoveQueenTests moveQueenTests = new MoveQueenTests();
         moveQueenTests.runTests();
+        EvaluateAttackTests evaluateAttackTests = new EvaluateAttackTests();
+        evaluateAttackTests.runTests();
     }
 }

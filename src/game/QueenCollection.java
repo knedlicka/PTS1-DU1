@@ -15,7 +15,7 @@ public abstract class QueenCollection {
 
     public Optional<Queen> removeQueen(Position position) {
         int cardIndex = position.getCardIndex();
-        if(0 < cardIndex && queens.size() > cardIndex) {
+        if(0 <= cardIndex && queens.size() > cardIndex) {
             Queen queen = queens.get(cardIndex);
             queens.remove(cardIndex);
             return Optional.of(queen);

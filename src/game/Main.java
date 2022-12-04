@@ -10,5 +10,7 @@ public class Main {
         handTests.runTests();
         SleepingQueensTests sleepingQueensTests = new SleepingQueensTests();
         sleepingQueensTests.runTests();
+        AwokenQueensTests awokenQueensTests = new AwokenQueensTests();
+        awokenQueensTests.runTests();
     }
 }

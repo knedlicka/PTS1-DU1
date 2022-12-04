@@ -21,7 +21,7 @@ public class GameAdaptor implements IGamePlayer{
         if(!playerNames.containsKey(player)){
             return "game.Player not found";
         }
-        List<Position> positions = new ArrayList<>();
+        List<IPosition> positions = new ArrayList<>();
         for(int i = 0; i < cards.length(); i++){
             if(cards.charAt(i) == 'h' && i + 1 < cards.length() && Character.isDigit(cards.charAt(i + 1))){
                 positions.add(new HandPosition(playerNames.get(player), Integer.parseInt(cards.charAt(i + 1) + "")));

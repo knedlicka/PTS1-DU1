@@ -9,8 +9,8 @@ public class SleepingQueens extends QueenCollection {
         this.queens = queens;
     }
     @Override
-    public Map<Position, Queen> getQueens() {
-        Map<Position, Queen> queenMap = new HashMap<>();
+    public Map<IPosition, Queen> getQueens() {
+        Map<IPosition, Queen> queenMap = new HashMap<>();
         for(int i = 0; i < queens.size(); i++) {
             SleepingQueenPosition sleepingQueenPosition = new SleepingQueenPosition(i);
             queenMap.put(sleepingQueenPosition, queens.get(i));

@@ -2,7 +2,7 @@ package game;
 
 import java.util.Objects;
 
-public class SleepingQueenPosition implements Position {
+public class SleepingQueenPosition implements IPosition {
     private final Integer cardIndex;
 
     public SleepingQueenPosition(Integer cardIndex) {

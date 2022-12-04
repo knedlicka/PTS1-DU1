@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class EvaluateAttack {
+public class EvaluateAttack implements IEvaluateAttack{
     private IHand targetHand;
     private CardType type;
     private CardType defenseCardType;
@@ -16,7 +16,7 @@ public class EvaluateAttack {
         this.moveQueen = moveQueen;
     }
 
-    public boolean play(Position targetQueen, Integer targetPlayerIndex) {
+    public boolean play(IPosition targetQueen, Integer targetPlayerIndex) {
         Optional<HandPosition> hp = targetHand.hasCardOfType(defenseCardType);
         if(hp.isEmpty()) { // uskutocni sa utok
             moveQueen.play(targetQueen);

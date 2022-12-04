@@ -5,10 +5,10 @@ import java.util.*;
 public class Player implements IPlayer {
     private Integer playerIndex;
     private final IHand hand;
-    private final AwokenQueens awokenQueens;
-    private final List<Map<CardType, EvaluateAttack>> evaluateAttackTable;
-    private final EvaluateKing evaluateKing;
-    private final EvaluateNumberedCards evaluateNumberedCards;
+    private final IQueenCollection awokenQueens;
+    private final List<Map<CardType, IEvaluateAttack>> evaluateAttackTable;
+    private final IEvaluateKing evaluateKing;
+    private final IEvaluateNumberedCards evaluateNumberedCards;
 
     enum PlayType {
         PlaySleepingPotion,
@@ -19,10 +19,10 @@ public class Player implements IPlayer {
     }
 
     public Player(
-            Hand hand,
-            AwokenQueens awokenQueens,
-            SleepingQueens sleepingQueens,
-            List<Map<CardType, EvaluateAttack>> evaluateAttackTable
+            IHand hand,
+            IQueenCollection awokenQueens,
+            IQueenCollection sleepingQueens,
+            List<Map<CardType, IEvaluateAttack>> evaluateAttackTable
     ) {
         this.hand = hand;
         this.awokenQueens = awokenQueens;
@@ -31,7 +31,7 @@ public class Player implements IPlayer {
         this.evaluateNumberedCards = new EvaluateNumberedCards(hand, playerIndex);
     }
 
-    PlayType determinePlayType(List<Position> cards) {
+    PlayType determinePlayType(List<IPosition> cards) {
         boolean containsSleepingPotion = false;
         boolean containsKnight = false;
         boolean containsKing = false;
@@ -40,7 +40,7 @@ public class Player implements IPlayer {
         boolean containsAwokenQueen = false;
 
         List<Card> myHandCards = hand.getCards();
-        for(Position p: cards) {
+        for(IPosition p: cards) {
             if(p instanceof HandPosition) {
                 Card card = myHandCards.get(p.getCardIndex());
                 CardType cardType = card.getType();
@@ -92,15 +92,15 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public boolean play(List<Position> cards) {
+    public boolean play(List<IPosition> cards) {
         PlayType playType = determinePlayType(cards);
 
         int opponentIndex = -1;
-        Position targetQueen = new AwokenQueenPosition(-1, -1); //nevadi ze toto je game.AwokenQueenPosition aj ked potom sa tam priradi game.SleepingQueenPosition
+        IPosition targetQueen = new AwokenQueenPosition(-1, -1); //nevadi ze toto je game.AwokenQueenPosition aj ked potom sa tam priradi game.SleepingQueenPosition
         HandPosition handPosition = new HandPosition(-1, -1);
         List<Card> numberedCards = new ArrayList<>();
         List<Card> cardsOnHand = hand.getCards();
-        for(Position pos: cards) {
+        for(IPosition pos: cards) {
            if(pos instanceof AwokenQueenPosition) {
                opponentIndex = ((AwokenQueenPosition) pos).getPlayerIndex();
                targetQueen = pos;
@@ -156,15 +156,15 @@ public class Player implements IPlayer {
         return new PlayerState(playerCards, playerAwokenQueens);
     }
 
-    public Hand getHand() {
-        return (Hand)hand;
+    public IHand getHand() {
+        return hand;
     }
 
     public Integer getPlayerIndex(){
         return playerIndex;
     }
 
-    public AwokenQueens getAwokenQueens() {
+    public IQueenCollection getAwokenQueens() {
         return awokenQueens;
     }
 }

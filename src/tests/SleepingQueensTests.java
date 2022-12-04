@@ -10,7 +10,7 @@ import java.util.Optional;
 import static tests.TestUtils.containsAll;
 
 public class SleepingQueensTests {
-    SleepingQueens sleepingQueens;
+    private IQueenCollection sleepingQueens;
     void createSleepingQueens() {
         List<Queen> queens = new ArrayList<>();
         queens.add(new Queen(1));
@@ -22,7 +22,7 @@ public class SleepingQueensTests {
 
     void testRemoveQueen() {
         createSleepingQueens();
-        Position position = new SleepingQueenPosition(1);
+        IPosition position = new SleepingQueenPosition(1);
         Optional<Queen> actual = sleepingQueens.removeQueen(position);
         Optional<Queen> expected = Optional.of(new Queen(2));
         if(!actual.equals(expected)) {
@@ -34,8 +34,8 @@ public class SleepingQueensTests {
 
     void testGetQueens() {
         createSleepingQueens();
-        Map<Position, Queen> actual = sleepingQueens.getQueens();
-        Map<Position, Queen> expected = new java.util.HashMap<>();
+        Map<IPosition, Queen> actual = sleepingQueens.getQueens();
+        Map<IPosition, Queen> expected = new java.util.HashMap<>();
         expected.put(new SleepingQueenPosition(0), new Queen(1));
         expected.put(new SleepingQueenPosition(1), new Queen(2));
         expected.put(new SleepingQueenPosition(2), new Queen(3));

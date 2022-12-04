@@ -3,14 +3,14 @@ package game;
 import java.util.List;
 
 public class MoveQueen implements IMoveQueen{
-    private static List<AwokenQueens> awokenQueensOfPlayers;
-    private static SleepingQueens sleepingQueens;
+    private static List<IQueenCollection> awokenQueensOfPlayers;
+    private static IQueenCollection sleepingQueens;
     private final int playerIndex;
     private final CardType causedBy;
 
     public MoveQueen(
-            List<AwokenQueens> awokenQueensOfPlayers,
-            SleepingQueens sleepingQueens,
+            List<IQueenCollection> awokenQueensOfPlayers,
+            IQueenCollection sleepingQueens,
             int playerIndex,
             CardType causedBy
     ) {
@@ -20,7 +20,7 @@ public class MoveQueen implements IMoveQueen{
         this.causedBy = causedBy;
     }
 
-    private boolean moveQueen(Position targetQueen, QueenCollection from, QueenCollection to) {
+    private boolean moveQueen(IPosition targetQueen, IQueenCollection from, IQueenCollection to) {
         Queen queen;
         try {
             queen = from.getQueens().get(targetQueen);
@@ -34,7 +34,7 @@ public class MoveQueen implements IMoveQueen{
         return true;
     }
 
-    public boolean play(Position targetQueen) {
+    public boolean play(IPosition targetQueen) {
         if(targetQueen instanceof SleepingQueenPosition) {
             if(causedBy != CardType.King) {
                 throw new IllegalArgumentException("Not a king");

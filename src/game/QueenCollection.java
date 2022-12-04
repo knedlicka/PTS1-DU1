@@ -2,7 +2,7 @@ package game;
 
 import java.util.*;
 
-public abstract class QueenCollection {
+public abstract class QueenCollection implements IQueenCollection{
     protected List<Queen> queens;
 
     public QueenCollection() {
@@ -13,7 +13,7 @@ public abstract class QueenCollection {
         queens.add(queen);
     }
 
-    public Optional<Queen> removeQueen(Position position) {
+    public Optional<Queen> removeQueen(IPosition position) {
         int cardIndex = position.getCardIndex();
         if(0 <= cardIndex && queens.size() > cardIndex) {
             Queen queen = queens.get(cardIndex);
@@ -26,5 +26,5 @@ public abstract class QueenCollection {
     public List<Queen> getListOfQueens() {
         return queens;
     }
-    public abstract Map<Position, Queen> getQueens();
+    public abstract Map<IPosition, Queen> getQueens();
 }

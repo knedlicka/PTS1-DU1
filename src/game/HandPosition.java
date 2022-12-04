@@ -1,6 +1,6 @@
 package game;
 
-public class HandPosition implements Position{
+public class HandPosition implements IPosition {
     private final Integer cardIndex;
     private final Integer playerIndex;
 

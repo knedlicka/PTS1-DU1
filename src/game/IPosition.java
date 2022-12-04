@@ -1,5 +1,5 @@
 package game;
 
-public interface Position {
+public interface IPosition {
     public Integer getCardIndex();
 }

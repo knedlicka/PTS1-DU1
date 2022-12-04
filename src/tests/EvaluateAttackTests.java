@@ -12,8 +12,8 @@ public class EvaluateAttackTests {
     private EvaluateAttack evaluateAttack;
     private IDrawingAndTrashPile drawingAndTrashPile;
     private Integer playerIndex;
-    private List<AwokenQueens> awokenQueensOfPlayers;
-    private SleepingQueens sleepingQueens;
+    private List<IQueenCollection> awokenQueensOfPlayers;
+    private IQueenCollection sleepingQueens;
     private IMoveQueen moveQueen;
 
     void createDrawingAndTrashPile() {

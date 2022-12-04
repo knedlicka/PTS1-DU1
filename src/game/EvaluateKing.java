@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class EvaluateKing {
-    private static AwokenQueens awokenQueens;
-    private static SleepingQueens sleepingQueens;
+public class EvaluateKing implements IEvaluateKing {
+    private static IQueenCollection awokenQueens;
+    private static IQueenCollection sleepingQueens;
     private static IHand hand;
 
-    public EvaluateKing(AwokenQueens awokenQueens, IHand hand) {
+    public EvaluateKing(IQueenCollection awokenQueens, IHand hand) {
         EvaluateKing.awokenQueens = awokenQueens;
         EvaluateKing.hand = hand;
     }
@@ -20,7 +20,7 @@ public class EvaluateKing {
             return false;
         }
 
-        Map<Position, Queen> allSleeping = sleepingQueens.getQueens();
+        Map<IPosition, Queen> allSleeping = sleepingQueens.getQueens();
         if(!allSleeping.containsKey(sleepingQueenPosition)) {
             return false;
         }

@@ -2,7 +2,7 @@ package tests;
 
 import game.AwokenQueenPosition;
 import game.AwokenQueens;
-import game.Position;
+import game.IPosition;
 import game.Queen;
 
 import java.util.Map;
@@ -30,8 +30,8 @@ public class AwokenQueensTests {
     }
     void testGetQueens() {
         createAwokenQueens();
-        Map<Position, Queen> actual = awokenQueens.getQueens();
-        Map<Position, Queen> expected = new java.util.HashMap<>();
+        Map<IPosition, Queen> actual = awokenQueens.getQueens();
+        Map<IPosition, Queen> expected = new java.util.HashMap<>();
         expected.put(new AwokenQueenPosition(0, 0), new Queen(1));
         expected.put(new AwokenQueenPosition(1, 0), new Queen(2));
         if(!containsAll(actual, expected)) {

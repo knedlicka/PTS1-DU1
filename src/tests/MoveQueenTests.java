@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoveQueenTests {
-    private List<AwokenQueens> awokenQueensOfEachPlayer;
-    private SleepingQueens sleepingQueens;
+    private List<IQueenCollection> awokenQueensOfEachPlayer;
+    private IQueenCollection sleepingQueens;
     private MoveQueen moveQueen;
     private Integer playerIdx;
     void createAwokenQueens() {
@@ -46,7 +46,7 @@ public class MoveQueenTests {
         expectedAwokenQueens.addQueen(new Queen(4));
         expectedAwokenQueens.addQueen(new Queen(1));
 
-        SleepingQueens expectedSleepingQueens = new SleepingQueens(new ArrayList<>());
+        IQueenCollection expectedSleepingQueens = new SleepingQueens(new ArrayList<>());
         expectedSleepingQueens.addQueen(new Queen(2));
 
         if(!actual && !awokenQueensOfEachPlayer.get(1).equals(expectedAwokenQueens) && !sleepingQueens.equals(expectedSleepingQueens)) {
@@ -72,7 +72,7 @@ public class MoveQueenTests {
         AwokenQueens expectedAwokenQueensOfPlayer0 = new AwokenQueens(0);
         expectedAwokenQueensOfPlayer0.addQueen(new Queen(6));
 
-        SleepingQueens expectedSleepingQueens = new SleepingQueens(new ArrayList<>());
+        IQueenCollection expectedSleepingQueens = new SleepingQueens(new ArrayList<>());
         expectedSleepingQueens.addQueen(new Queen(1));
         expectedSleepingQueens.addQueen(new Queen(2));
 
@@ -101,7 +101,7 @@ public class MoveQueenTests {
         expectedAwokenQueensOfPlayer1.addQueen(new Queen(3));
         expectedAwokenQueensOfPlayer1.addQueen(new Queen(4));
 
-        SleepingQueens expectedSleepingQueens = new SleepingQueens(new ArrayList<>());
+        IQueenCollection expectedSleepingQueens = new SleepingQueens(new ArrayList<>());
         expectedSleepingQueens.addQueen(new Queen(1));
         expectedSleepingQueens.addQueen(new Queen(2));
         expectedSleepingQueens.addQueen(new Queen(5));

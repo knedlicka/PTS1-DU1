@@ -2,7 +2,7 @@ package game;
 
 import java.util.Objects;
 
-public class AwokenQueenPosition implements Position{
+public class AwokenQueenPosition implements IPosition {
     private final Integer cardIndex;
     private final Integer playerIndex;
 

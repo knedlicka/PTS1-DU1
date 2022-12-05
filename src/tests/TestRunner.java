@@ -28,5 +28,7 @@ public class TestRunner {
         gameFinishedTests.runTests();
         GameAdaptorTests gameAdaptorTests = new GameAdaptorTests();
         gameAdaptorTests.runTests();
+        GameObservableTests gameObservableTests = new GameObservableTests();
+        gameObservableTests.runTests();
     }
 }

@@ -1,5 +1,5 @@
 package game;
 
 public interface IEvaluateKing {
-    boolean play(HandPosition handPosition, SleepingQueenPosition sleepingQueenPosition);
+    boolean play(HandPosition handPosition, IPosition sleepingQueenPosition);
 }

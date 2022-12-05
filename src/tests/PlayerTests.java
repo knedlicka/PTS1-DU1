@@ -145,7 +145,7 @@ public class PlayerTests {
 
     private class MockedEvaluateKing implements IEvaluateKing {
         @Override
-        public boolean play(HandPosition handPosition, SleepingQueenPosition sleepingQueenPosition) {
+        public boolean play(HandPosition handPosition, IPosition sleepingQueenPosition) {
             return handPosition.getCardIndex() == 0;
         }
     }

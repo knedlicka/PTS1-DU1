@@ -36,7 +36,7 @@ public class GameFinished implements IGameFinishedStrategy {
                 maxPoints = points;
                 playerIndex = i;
             }
-            if(points >= neededPoints || awokenQueens.size() > neededQueens) {
+            if(points >= neededPoints || awokenQueens.size() >= neededQueens) {
                 return Optional.of(i);
             }
         }

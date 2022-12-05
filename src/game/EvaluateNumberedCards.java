@@ -38,18 +38,8 @@ public class EvaluateNumberedCards implements IEvaluateNumberedCards{
         return false;
     }
 
-    public boolean play(List<Card> cards) { // TODO nemusi vyhodit kartu na tej pozicii, ktoru si vybral hrac, ak ma na ruke aspon dve rovnake karty
+    public boolean play(List<Card> cards, List<IPosition> handPositions) {
         if (canBeDiscarded(cards)) {
-            List<IPosition> handPositions = new ArrayList<>();
-            List<Card> handCards = hand.getCards();
-            for (Card card : cards) {
-                for (int i = 0; i < handCards.size(); i++) {
-                    if (card.equals(handCards.get(i))) {
-                        HandPosition hp = new HandPosition(i, playerIndex);
-                        handPositions.add(hp);
-                    }
-                }
-            }
             if(handPositions.size() != cards.size()) {
                 return false;
             }

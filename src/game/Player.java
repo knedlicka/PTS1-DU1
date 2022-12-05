@@ -131,7 +131,7 @@ public class Player implements IPlayer {
                     return evaluateKing.play(handPosition, (SleepingQueenPosition)targetQueen);
                 }
             case PlayNumber:
-                return evaluateNumberedCards.play(numberedCards);
+                return evaluateNumberedCards.play(numberedCards, cards);
             default:
                 return false;
         }

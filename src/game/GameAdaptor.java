@@ -46,13 +46,10 @@ public class GameAdaptor implements IGamePlayer{
             }
         }
 
-        Optional<Integer> winner = game.getWinner();
-        if(winner.isPresent()){
-            return "Game is finished, the winner is " + playerNamesInverse.get(winner.get());
-        }
-
         Optional<GameState> gameState = game.play(playerNames.get(player), positions);
         gameState.ifPresent(observable::notifyAll);
-        return gameState.toString();
+
+        Optional<Integer> winner = game.getWinner();
+        return winner.map(winnerIdx -> "Game is finished, the winner is " + playerNamesInverse.get(winnerIdx)).orElseGet(gameState::toString);
     }
 }

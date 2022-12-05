@@ -42,13 +42,14 @@ public class DrawingStrategy1Tests {
         List<Card> actualDraw = strategy.discardAndDraw(discard, drawingPile, discardPile, new Random(1));
 
         if(!expectedDraw.equals(actualDraw)) {
-            System.err.println("[FAILED] testDiscardAndDraw1");
+            System.err.println("    [FAILED] testDiscardAndDraw1");
         } else {
-            System.out.println("[PASSED] testDiscardAndDraw1");
+            System.out.println("    [PASSED] testDiscardAndDraw1");
         }
     }
 
     public void runTests() {
+        System.out.println("DrawingStrategy1Tests:");
         testDiscardAndDraw();
     }
 }

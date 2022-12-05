@@ -20,5 +20,7 @@ public class TestRunner {
         playerTests.runTests();
         EvaluateNumberedCardsTests evaluateNumberedCardsTests = new EvaluateNumberedCardsTests();
         evaluateNumberedCardsTests.runTests();
+        GameTests gameTests = new GameTests();
+        gameTests.runTests();
     }
 }

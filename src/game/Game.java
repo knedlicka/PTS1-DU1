@@ -8,6 +8,7 @@ public class Game implements IGame {
     private final IDrawingAndTrashPile drawingAndTrashPile;
     private final IQueenCollection sleepingQueens;
     private int playerOnTurn;
+    private IGameFinishedStrategy gameFinishedStrategy;
 
     public Game(int numberOfPlayers, List<Card> drawingPile, List<Queen> queensSleeping, IDrawingStrategy drawingStrategy) {
         this.numberOfPlayers = numberOfPlayers;
@@ -66,6 +67,9 @@ public class Game implements IGame {
                     evaluateNumberedCards
             ));
         }
+        Integer neededPoints = numberOfPlayers < 4 ? 40 : 50;
+        Integer neededQueens = numberOfPlayers < 4 ? 4 : 5;
+        this.gameFinishedStrategy = new GameFinished(allPlayersAwokenQueens, numberOfPlayers, neededPoints, neededQueens);
     }
 
     GameState getGameState(List<Card> cardsDiscardedLastTurn){
@@ -97,16 +101,18 @@ public class Game implements IGame {
 
     @Override
     public Optional<GameState> play(Integer playerIdx, List<IPosition> cards) {
-        if (playerIdx != playerOnTurn) {
+        if (playerIdx != playerOnTurn || getWinner().isPresent()) {
             return Optional.empty();
         }
         IPlayer player = players.get(playerIdx);
-        if(player.play(cards)){
+        if(player.play(cards)) {
             playerOnTurn = (playerOnTurn + 1) % numberOfPlayers;
             return Optional.of(getGameState(drawingAndTrashPile.getCardsDiscardedThisTurn()));
         }
         return Optional.empty();
     }
 
-
+    public Optional<Integer> getWinner() {
+        return gameFinishedStrategy.isFinished();
+    }
 }

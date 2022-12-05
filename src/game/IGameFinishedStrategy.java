@@ -2,6 +2,6 @@ package game;
 
 import java.util.Optional;
 
-public interface GameFinishedStrategy {
+public interface IGameFinishedStrategy {
     Optional<Integer> isFinished();
 }

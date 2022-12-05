@@ -5,13 +5,16 @@ import java.util.*;
 public class GameAdaptor implements IGamePlayer{
     private final IGame game;
     private final Map<String, Integer> playerNames;
+    private final Map<Integer, String> playerNamesInverse;
     private final GameObservable observable;
     public GameAdaptor(Integer numberOfPlayers, List<String> playerNames, GameObservable observable, IDrawingStrategy drawingStrategy) {
         IDealer dealer = new Dealer();
         game = new Game(numberOfPlayers, dealer.getDrawingPile(), dealer.getQueensSleeping(), drawingStrategy);
         this.playerNames = new HashMap<>();
+        this.playerNamesInverse = new HashMap<>();
         for(int i = 0; i < playerNames.size(); i++){
             this.playerNames.put(playerNames.get(i), i);
+            this.playerNamesInverse.put(i, playerNames.get(i));
         }
         this.observable = observable;
     }
@@ -41,6 +44,11 @@ public class GameAdaptor implements IGamePlayer{
             else{
                 return "Invalid input";
             }
+        }
+
+        Optional<Integer> winner = game.getWinner();
+        if(winner.isPresent()){
+            return "Game is finished, the winner is " + playerNamesInverse.get(winner.get());
         }
 
         Optional<GameState> gameState = game.play(playerNames.get(player), positions);

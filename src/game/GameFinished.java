@@ -3,14 +3,14 @@ package game;
 import java.util.List;
 import java.util.Optional;
 
-public class GameFinished implements GameFinishedStrategy{
-    private final List<AwokenQueens> awokenQueensOfPlayers;
+public class GameFinished implements IGameFinishedStrategy {
+    private final List<IQueenCollection> awokenQueensOfPlayers;
     private final Integer numberOfPlayers;
     private final Integer neededPoints;
     private final Integer neededQueens;
 
     public GameFinished(
-            List<AwokenQueens> awokenQueensOfPlayers,
+            List<IQueenCollection> awokenQueensOfPlayers,
             Integer numberOfPlayers,
             Integer neededPoints,
             Integer neededQueens

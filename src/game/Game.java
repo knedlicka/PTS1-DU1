@@ -8,9 +8,12 @@ public class Game implements IGame {
     private final IDrawingAndTrashPile drawingAndTrashPile;
     private final IQueenCollection sleepingQueens;
     private int playerOnTurn;
-    private IGameFinishedStrategy gameFinishedStrategy;
+    private final IGameFinishedStrategy gameFinishedStrategy;
 
     public Game(int numberOfPlayers, List<Card> drawingPile, List<Queen> queensSleeping, IDrawingStrategy drawingStrategy) {
+        if(numberOfPlayers < 2 || numberOfPlayers > 5) {
+            throw new IllegalArgumentException("Number of players must be between 2 and 5");
+        }
         this.numberOfPlayers = numberOfPlayers;
         playerOnTurn = 0;
         drawingAndTrashPile = new DrawingAndTrashPile(drawingPile, new ArrayList<>(), drawingStrategy);

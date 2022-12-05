@@ -7,8 +7,9 @@ public class GameAdaptor implements IGamePlayer{
     private final Map<String, Integer> playerNames;
     private final Map<Integer, String> playerNamesInverse;
     private final GameObservable observable;
-    public GameAdaptor(Integer numberOfPlayers, List<String> playerNames, GameObservable observable, IDrawingStrategy drawingStrategy) {
-        IDealer dealer = new Dealer();
+    private IDealer dealer;
+    public GameAdaptor(Integer numberOfPlayers, List<String> playerNames, GameObservable observable, IDrawingStrategy drawingStrategy, IDealer dealer) {
+        this.dealer = dealer;
         game = new Game(numberOfPlayers, dealer.getDrawingPile(), dealer.getQueensSleeping(), drawingStrategy);
         this.playerNames = new HashMap<>();
         this.playerNamesInverse = new HashMap<>();

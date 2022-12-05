@@ -23,7 +23,7 @@ public class GameState {
         this.sleepingQueens = sleepingQueens;
         this.cards = cards;
         this.awokenQueens = awokenQueens;
-        this.cardsDiscardedLastTurn = cardsDiscardedLastTurn;
+        this.cardsDiscardedLastTurn = cardsDiscardedLastTurn == null ? new ArrayList<>() : cardsDiscardedLastTurn;
     }
     public Integer getOnTurn() {
         return onTurn;
@@ -34,7 +34,7 @@ public class GameState {
     public Map<HandPosition, Optional<Card>> getCards(Integer playerIdx) {
         Map<HandPosition, Optional<Card>> playerCards = new HashMap<>();
         for(HandPosition pos: cards.keySet()) {
-            if(pos.getPlayerIndex() == playerIdx) {
+            if(pos.getPlayerIndex().equals(playerIdx)) {
                 playerCards.put(pos, cards.get(pos));
             }
         }
@@ -43,10 +43,22 @@ public class GameState {
     public Map<AwokenQueenPosition, Queen> getAwokenQueens(Integer playerIdx) {
         Map<AwokenQueenPosition, Queen> playerAwokenQueens = new HashMap<>();
         for(AwokenQueenPosition pos: awokenQueens.keySet()) {
-            if(pos.getPlayerIndex() == playerIdx) {
+            if(pos.getPlayerIndex().equals(playerIdx)) {
                 playerAwokenQueens.put(pos, awokenQueens.get(pos));
             }
         }
         return playerAwokenQueens;
+    }
+
+    @Override
+    public String toString() {
+        String message = "";
+        message += "onTurn: " + onTurn.toString() + "\n";
+        message += "numberOfPlayers: " + numberOfPlayers.toString() + "\n";
+        message += "sleepingQueens: " + sleepingQueens.toString() + "\n";
+        message += "cards: " + cards.toString() + "\n";
+        message += "awokenQueens: " + awokenQueens.toString() + "\n";
+        message += "cardsDiscardedLastTurn: " + cardsDiscardedLastTurn.toString() + "\n";
+        return message;
     }
 }

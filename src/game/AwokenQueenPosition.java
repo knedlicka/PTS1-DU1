@@ -35,4 +35,9 @@ public class AwokenQueenPosition implements IPosition {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "AwokenQueenPosition{" + "cardIndex=" + cardIndex + ", playerIndex=" + playerIndex + '}';
+    }
 }

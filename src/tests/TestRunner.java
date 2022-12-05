@@ -26,5 +26,7 @@ public class TestRunner {
         evaluateKingTests.runTests();
         GameFinishedTests gameFinishedTests = new GameFinishedTests();
         gameFinishedTests.runTests();
+        GameAdaptorTests gameAdaptorTests = new GameAdaptorTests();
+        gameAdaptorTests.runTests();
     }
 }

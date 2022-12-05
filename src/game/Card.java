@@ -36,4 +36,9 @@ public class Card {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Card{" + "type=" + type.name() + ", value=" + value + '}';
+    }
 }

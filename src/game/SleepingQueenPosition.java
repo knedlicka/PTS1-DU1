@@ -25,4 +25,9 @@ public class SleepingQueenPosition implements IPosition {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "SleepingQueenPosition{" + "cardIndex=" + cardIndex + '}';
+    }
 }

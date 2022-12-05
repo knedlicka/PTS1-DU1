@@ -28,4 +28,9 @@ public class HandPosition implements IPosition {
         final HandPosition other = (HandPosition) obj;
         return this.cardIndex.equals(other.cardIndex) && this.playerIndex.equals(other.playerIndex);
     }
+
+    @Override
+    public String toString() {
+        return "HandPosition{" + "cardIndex=" + cardIndex + ", playerIndex=" + playerIndex + '}';
+    }
 }

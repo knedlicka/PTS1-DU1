@@ -24,4 +24,9 @@ public class Queen {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Queen{" + "points=" + points + '}';
+    }
 }

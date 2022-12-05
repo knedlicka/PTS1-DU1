@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 public class EvaluateKing implements IEvaluateKing {
-    private static IQueenCollection awokenQueens;
-    private static IQueenCollection sleepingQueens;
-    private static IHand hand;
+    private IQueenCollection awokenQueens;
+    private IQueenCollection sleepingQueens;
+    private IHand hand;
 
-    public EvaluateKing(IQueenCollection awokenQueens, IHand hand) {
-        EvaluateKing.awokenQueens = awokenQueens;
-        EvaluateKing.hand = hand;
+    public EvaluateKing(IQueenCollection awokenQueens, IHand hand, IQueenCollection sleepingQueens) {
+        this.awokenQueens = awokenQueens;
+        this.hand = hand;
+        this.sleepingQueens = sleepingQueens;
     }
 
     public boolean play(HandPosition handPosition, SleepingQueenPosition sleepingQueenPosition) {

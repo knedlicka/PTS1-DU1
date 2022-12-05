@@ -21,13 +21,15 @@ public class Player implements IPlayer {
     public Player(
             IHand hand,
             IQueenCollection awokenQueens,
-            List<Map<CardType, IEvaluateAttack>> evaluateAttackTable
+            List<Map<CardType, IEvaluateAttack>> evaluateAttackTable,
+            IEvaluateKing evaluateKing,
+            IEvaluateNumberedCards evaluateNumberedCards
     ) {
         this.hand = hand;
         this.awokenQueens = awokenQueens;
         this.evaluateAttackTable = evaluateAttackTable;
-        this.evaluateKing = new EvaluateKing(awokenQueens, hand);
-        this.evaluateNumberedCards = new EvaluateNumberedCards(hand, playerIndex);
+        this.evaluateKing = evaluateKing;
+        this.evaluateNumberedCards = evaluateNumberedCards;
     }
 
     PlayType determinePlayType(List<IPosition> cards) {

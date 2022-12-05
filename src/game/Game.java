@@ -56,10 +56,14 @@ public class Game implements IGame {
 
         this.players = new ArrayList<>();
         for (int playerIdx = 0; playerIdx < numberOfPlayers; playerIdx++) {
+            IEvaluateKing evaluateKing = new EvaluateKing(allPlayersAwokenQueens.get(playerIdx), hands.get(playerIdx), sleepingQueens);
+            IEvaluateNumberedCards evaluateNumberedCards = new EvaluateNumberedCards(hands.get(playerIdx), playerIdx);
             players.add(new Player(
                     hands.get(playerIdx),
                     allPlayersAwokenQueens.get(playerIdx),
-                    playersEvaluateAttackTable
+                    playersEvaluateAttackTable,
+                    evaluateKing,
+                    evaluateNumberedCards
             ));
         }
     }

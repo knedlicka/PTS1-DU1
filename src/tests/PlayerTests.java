@@ -131,13 +131,28 @@ public class PlayerTests {
         }
     }
 
+    private class MockedEvaluateNumberedCards implements IEvaluateNumberedCards {
+        @Override
+        public boolean play(List<Card> cards, List<IPosition> handPositions) {
+            for(IPosition handPosition: handPositions) {
+                if(!cards.get(handPosition.getCardIndex()).getType().equals(CardType.Number)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    private class MockedEvaluateKing implements IEvaluateKing {
+        @Override
+        public boolean play(HandPosition handPosition, SleepingQueenPosition sleepingQueenPosition) {
+            return handPosition.getCardIndex() == 0;
+        }
+    }
+
     private Player player;
 
-    private void createPlayer(Card playerCard, Card opponentsCard) {
-        List<Card> playerCards = new ArrayList<>();
-        playerCards.add(playerCard);
-        List<Card> opponentCards = new ArrayList<>();
-        opponentCards.add(opponentsCard);
+    private void createPlayer(List<Card> playerCards, List<Card> opponentCards) {
         MockedHand hand = new MockedHand(playerCards);
         MockedHand opponentHand = new MockedHand(opponentCards);
         MockedAwokenQueens awokenQueens = new MockedAwokenQueens();
@@ -151,18 +166,20 @@ public class PlayerTests {
                         CardType.SleepingPotion, new MockedEvaluateAttack(opponentHand, CardType.MagicWand)
                 )
         );
-        player = new Player(hand, awokenQueens, evaluateAttackTable);
+        MockedEvaluateKing evaluateKing = new MockedEvaluateKing();
+        MockedEvaluateNumberedCards evaluateNumberedCards = new MockedEvaluateNumberedCards();
+        player = new Player(hand, awokenQueens, evaluateAttackTable, evaluateKing, evaluateNumberedCards);
     }
 
-    private void testPlayAttack(Card attackingCard, Card opponentCard, boolean expectedAttackSuccessful) {
-        createPlayer(attackingCard, opponentCard);
+    private void testPlayAttack(List<Card> attackingCards, List<Card> opponentCards, boolean expectedAttackSuccessful) {
+        createPlayer(attackingCards, opponentCards);
         boolean attackSuccesful = player.play(
                 List.of(
                         new HandPosition(0, 0),
                         new AwokenQueenPosition(0, 1)
                 )
         );
-        String testName = "testPlayAttack " + attackingCard.getType().name() + " vs " + opponentCard.getType().name();
+        String testName = "testPlayAttack " + attackingCards.get(0).getType().name() + " vs " + opponentCards.get(0).getType().name();
         if(attackSuccesful == expectedAttackSuccessful) {
             System.out.println("    [PASSED] " + testName);
         } else {
@@ -170,18 +187,119 @@ public class PlayerTests {
         }
     }
 
-    private void testPlay() {
+    private void testAttacks() {
         // Test attacks
-        testPlayAttack(new Card(CardType.Knight, 10), new Card(CardType.Knight, 10), true);
-        testPlayAttack(new Card(CardType.Knight, 10), new Card(CardType.King, 10), true);
-        testPlayAttack(new Card(CardType.Knight, 10), new Card(CardType.Dragon, 10), false);
-        testPlayAttack(new Card(CardType.SleepingPotion, 10), new Card(CardType.Knight, 10), true);
-        testPlayAttack(new Card(CardType.SleepingPotion, 10), new Card(CardType.Number, 10), true);
-        testPlayAttack(new Card(CardType.SleepingPotion, 10), new Card(CardType.MagicWand, 10), false);
+        ArrayList<Card> attackingCards = new ArrayList<>();
+        ArrayList<Card> defendingCards = new ArrayList<>();
+        attackingCards.add(new Card(CardType.Knight, 10));
+        defendingCards.add(new Card(CardType.Knight, 10));
+        testPlayAttack(attackingCards, defendingCards, true);
+
+        defendingCards = new ArrayList<>();
+        defendingCards.add(new Card(CardType.Number, 10));
+        testPlayAttack(attackingCards, defendingCards, true);
+
+        defendingCards = new ArrayList<>();
+        defendingCards.add(new Card(CardType.Dragon, 10));
+        testPlayAttack(attackingCards, defendingCards, false);
+
+        attackingCards = new ArrayList<>();
+        attackingCards.add(new Card(CardType.SleepingPotion, 10));
+        defendingCards = new ArrayList<>();
+        defendingCards.add(new Card(CardType.Knight, 10));
+        testPlayAttack(attackingCards, defendingCards, true);
+
+        defendingCards = new ArrayList<>();
+        defendingCards.add(new Card(CardType.Number, 10));
+        testPlayAttack(attackingCards, defendingCards, true);
+
+        defendingCards = new ArrayList<>();
+        defendingCards.add(new Card(CardType.MagicWand, 10));
+        testPlayAttack(attackingCards, defendingCards, false);
+    }
+
+    private void testNumberedCardsSuccess() {
+        ArrayList<Card> playerCards = new ArrayList<>();
+        for(int i = 1; i <= 3; i++) {
+            playerCards.add(new Card(CardType.Number, i));
+        }
+        createPlayer(playerCards, new ArrayList<>());
+        boolean playedSuccessfully = player.play(List.of(
+                new HandPosition(0, 0),
+                new HandPosition(1, 0),
+                new HandPosition(2, 0)
+        ));
+        if(!playedSuccessfully) {
+            System.err.println("    [FAILED] testNumberedCardsSuccess");
+        } else {
+            System.out.println("    [PASSED] testNumberedCardsSuccess");
+        }
+    }
+
+    private void testNumberedCardsFail() {
+        ArrayList<Card> playerCards = new ArrayList<>();
+        for(int i = 1; i <= 2; i++) {
+            playerCards.add(new Card(CardType.Number, i));
+        }
+        playerCards.add(new Card(CardType.Knight, 10));
+        createPlayer(playerCards, new ArrayList<>());
+        boolean playedSuccessfully = player.play(List.of(
+                new HandPosition(0, 0),
+                new HandPosition(1, 0),
+                new HandPosition(2, 0)
+        ));
+        if(playedSuccessfully) {
+            System.err.println("    [FAILED] testNumberedCardsFail");
+        } else {
+            System.out.println("    [PASSED] testNumberedCardsFail");
+        }
+    }
+
+    private void testNumberedCards() {
+        testNumberedCardsSuccess();
+        testNumberedCardsFail();
+    }
+
+    private void testKingSuccess() {
+        ArrayList<Card> playerCards = new ArrayList<>();
+        playerCards.add(new Card(CardType.King, 10));
+        createPlayer(playerCards, new ArrayList<>());
+        boolean playedSuccessfully = player.play(List.of(
+                new HandPosition(0, 0),
+                new SleepingQueenPosition(0)
+        ));
+        if(!playedSuccessfully) {
+            System.err.println("    [FAILED] testKingSuccess");
+        } else {
+            System.out.println("    [PASSED] testKingSuccess");
+        }
+    }
+
+    private void testKingFail() {
+        ArrayList<Card> playerCards = new ArrayList<>();
+        playerCards.add(new Card(CardType.King, 10));
+        playerCards.add(new Card(CardType.Knight, 10));
+        createPlayer(playerCards, new ArrayList<>());
+        boolean playedSuccessfully = player.play(List.of(
+                new HandPosition(1, 0),
+                new SleepingQueenPosition(0)
+        ));
+        if(playedSuccessfully) {
+            System.err.println("    [FAILED] testKingFail");
+        } else {
+            System.out.println("    [PASSED] testKingFail");
+        }
+    }
+
+    private void testKing() {
+        testKingSuccess();
+        testKingFail();
     }
 
     public void runTests() {
         System.out.println("Running PlayerTests:");
-        testPlay();
+        testAttacks();
+        testNumberedCards();
+        testKing();
     }
 }

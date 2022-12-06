@@ -1,3 +1,0 @@
-public interface IGamePlayer {
-    public String play(String player, String cards);
-}

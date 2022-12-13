@@ -1,7 +1,7 @@
 package tests;
 
 import game.Card;
-import game.CardType;
+import game.CardType; // REVIEW: unused import
 import game.DrawingStrategy1;
 
 import java.util.ArrayList;

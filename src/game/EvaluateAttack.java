@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class EvaluateAttack implements IEvaluateAttack{
     private IHand targetHand;
-    private CardType type;
+    private CardType type; // REVIEW: this variable is never used
     private CardType defenseCardType;
     private IMoveQueen moveQueen;
     public EvaluateAttack(IHand targetHand, CardType type, CardType defenseCardType, IMoveQueen moveQueen) {

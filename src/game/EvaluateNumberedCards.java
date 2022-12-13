@@ -1,12 +1,12 @@
 package game;
 
-import java.util.ArrayList;
+import java.util.ArrayList; // REVIEW: unused import
 import java.util.List;
 
 public class EvaluateNumberedCards implements IEvaluateNumberedCards{
     private final IHand hand;
 
-    private final Integer playerIndex;
+    private final Integer playerIndex; // REVIEW: this variable is never used apart from assignment
 
     public EvaluateNumberedCards(IHand hand, Integer playerIndex) {
         this.hand = hand;
@@ -24,6 +24,8 @@ public class EvaluateNumberedCards implements IEvaluateNumberedCards{
             return true;
         }
 
+        // REVIEW: since it must be an addition equation, sum of all cards, that are not the highest card, must be
+        // equal to the value of the highest card, therefore you don't have to try every combination separately
         for (int i = 0; i < cards.size(); i++) {
             int sum = 0;
             for (int j = 0; j < cards.size(); j++) {

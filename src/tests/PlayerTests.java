@@ -168,7 +168,7 @@ public class PlayerTests {
         );
         MockedEvaluateKing evaluateKing = new MockedEvaluateKing();
         MockedEvaluateNumberedCards evaluateNumberedCards = new MockedEvaluateNumberedCards();
-        player = new Player(hand, awokenQueens, evaluateAttackTable, evaluateKing, evaluateNumberedCards);
+        player = new Player(hand, awokenQueens, evaluateAttackTable, evaluateKing, evaluateNumberedCards, 1);
     }
 
     private void testPlayAttack(List<Card> attackingCards, List<Card> opponentCards, boolean expectedAttackSuccessful) {

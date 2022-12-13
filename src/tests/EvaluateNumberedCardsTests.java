@@ -23,7 +23,7 @@ public class EvaluateNumberedCardsTests {
             cards.add(new Card(CardType.Number, i));
         }
         IHand hand = new Hand(0, cards, drawingAndTrashPile);
-        evaluateNumberedCards = new EvaluateNumberedCards(hand, 0);
+        evaluateNumberedCards = new EvaluateNumberedCards(hand);
     }
 
     private void testPlay1And2And3() {

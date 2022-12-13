@@ -3,7 +3,7 @@ package game;
 import java.util.*;
 
 public class Player implements IPlayer {
-    private Integer playerIndex;
+    private final Integer playerIndex;
     private final IHand hand;
     private final IQueenCollection awokenQueens;
     private final List<Map<CardType, IEvaluateAttack>> evaluateAttackTable;
@@ -23,13 +23,15 @@ public class Player implements IPlayer {
             IQueenCollection awokenQueens,
             List<Map<CardType, IEvaluateAttack>> evaluateAttackTable,
             IEvaluateKing evaluateKing,
-            IEvaluateNumberedCards evaluateNumberedCards
+            IEvaluateNumberedCards evaluateNumberedCards,
+            Integer playerIndex
     ) {
         this.hand = hand;
         this.awokenQueens = awokenQueens;
         this.evaluateAttackTable = evaluateAttackTable;
         this.evaluateKing = evaluateKing;
         this.evaluateNumberedCards = evaluateNumberedCards;
+        this.playerIndex = playerIndex;
     }
 
     PlayType determinePlayType(List<IPosition> cards) {

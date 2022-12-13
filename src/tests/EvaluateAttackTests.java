@@ -70,7 +70,7 @@ public class EvaluateAttackTests {
         createDrawingAndTrashPile();
         createHand();
         createMoveQueen(CardType.Knight);
-        this.evaluateAttack = new EvaluateAttack(hand,cardType, defenseType, moveQueen);
+        this.evaluateAttack = new EvaluateAttack(hand, defenseType, moveQueen);
     }
 
     void testPlayKnight() {

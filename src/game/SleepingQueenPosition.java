@@ -20,10 +20,7 @@ public class SleepingQueenPosition implements IPosition {
             return false;
         }
         final SleepingQueenPosition other = (SleepingQueenPosition) obj;
-        if (!Objects.equals(this.cardIndex, other.cardIndex)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.cardIndex, other.cardIndex);
     }
 
     @Override

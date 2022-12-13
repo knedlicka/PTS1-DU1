@@ -1,16 +1,13 @@
 package game;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EvaluateNumberedCards implements IEvaluateNumberedCards{
     private final IHand hand;
 
-    private final Integer playerIndex;
 
-    public EvaluateNumberedCards(IHand hand, Integer playerIndex) {
+    public EvaluateNumberedCards(IHand hand) {
         this.hand = hand;
-        this.playerIndex = playerIndex;
     }
 
     private boolean canBeDiscarded(List<Card> cards) {

@@ -48,7 +48,6 @@ public class Game implements IGame {
                             attackCardType,
                             new EvaluateAttack(
                                     hands.get(opponentIdx),
-                                    attackCardType,
                                     defenseCardType,
                                     moveQueen
                             )
@@ -61,13 +60,14 @@ public class Game implements IGame {
         this.players = new ArrayList<>();
         for (int playerIdx = 0; playerIdx < numberOfPlayers; playerIdx++) {
             IEvaluateKing evaluateKing = new EvaluateKing(allPlayersAwokenQueens.get(playerIdx), hands.get(playerIdx), sleepingQueens);
-            IEvaluateNumberedCards evaluateNumberedCards = new EvaluateNumberedCards(hands.get(playerIdx), playerIdx);
+            IEvaluateNumberedCards evaluateNumberedCards = new EvaluateNumberedCards(hands.get(playerIdx));
             players.add(new Player(
                     hands.get(playerIdx),
                     allPlayersAwokenQueens.get(playerIdx),
                     playersEvaluateAttackTable,
                     evaluateKing,
-                    evaluateNumberedCards
+                    evaluateNumberedCards,
+                    playerIdx
             ));
         }
         Integer neededPoints = numberOfPlayers < 4 ? 40 : 50;

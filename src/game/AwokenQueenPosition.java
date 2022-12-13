@@ -30,10 +30,7 @@ public class AwokenQueenPosition implements IPosition {
         if (!Objects.equals(this.cardIndex, other.cardIndex)) {
             return false;
         }
-        if (!Objects.equals(this.playerIndex, other.playerIndex)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.playerIndex, other.playerIndex);
     }
 
     @Override

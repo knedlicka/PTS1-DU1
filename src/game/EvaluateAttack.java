@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class EvaluateAttack implements IEvaluateAttack{
-    private IHand targetHand;
-    private CardType type;
-    private CardType defenseCardType;
-    private IMoveQueen moveQueen;
-    public EvaluateAttack(IHand targetHand, CardType type, CardType defenseCardType, IMoveQueen moveQueen) {
+    private final IHand targetHand;
+    private final CardType defenseCardType;
+    private final IMoveQueen moveQueen;
+    public EvaluateAttack(IHand targetHand, CardType defenseCardType, IMoveQueen moveQueen) {
         this.targetHand = targetHand;
-        this.type = type;
         this.defenseCardType = defenseCardType;
         this.moveQueen = moveQueen;
     }

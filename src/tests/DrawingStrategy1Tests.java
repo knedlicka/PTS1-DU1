@@ -1,7 +1,6 @@
 package tests;
 
 import game.Card;
-import game.CardType;
 import game.DrawingStrategy1;
 
 import java.util.ArrayList;

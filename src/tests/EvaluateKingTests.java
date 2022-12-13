@@ -2,7 +2,7 @@ package tests;
 
 import game.*;
 
-import javax.swing.text.Position;
+import javax.swing.text.Position; // REVIEW: unused import
 import java.util.ArrayList;
 import java.util.List;
 

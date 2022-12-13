@@ -31,7 +31,7 @@ public class GameObservable {
         }
     }
 
-    public void addPlayer(Integer playerIndex, IGameObserver observer) {
+    public void addPlayer(Integer playerIndex, IGameObserver observer) { // REVIEW: this method is never used, does that mean players don't get notified?
         playerObservers.put(playerIndex, observer);
         observers.add(playerIndex, observer);
     }

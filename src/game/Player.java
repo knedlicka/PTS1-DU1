@@ -3,7 +3,7 @@ package game;
 import java.util.*;
 
 public class Player implements IPlayer {
-    private Integer playerIndex;
+    private Integer playerIndex; // REVIEW: a value is never put in this variable
     private final IHand hand;
     private final IQueenCollection awokenQueens;
     private final List<Map<CardType, IEvaluateAttack>> evaluateAttackTable;
@@ -77,7 +77,7 @@ public class Player implements IPlayer {
                 typesCnt++;
             }
         }
-        if(containsSleepingPotion && containsAwokenQueen && typesCnt == 2) {
+        if(containsSleepingPotion && containsAwokenQueen && typesCnt == 2) { //REVIEW: it's not really clear, why are you counting card types, maybe add some comments?
             return PlayType.PlaySleepingPotion;
         }
         if(containsKnight && containsAwokenQueen && typesCnt == 2) {

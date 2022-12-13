@@ -1,7 +1,7 @@
 package tests;
 
 import game.Card;
-import game.CardType;
+import game.CardType; // REVIEW: unused import
 import game.DrawingStrategy2;
 
 import java.util.ArrayList;
@@ -19,8 +19,8 @@ public class DrawingStrategy2Tests {
         List<Card> drawingPile = makeListOfNumberedCards(List.of(4, 5));
         List<Card> discardPile = makeListOfNumberedCards(List.of(6, 7, 8));
 
-        List<Card> newDrawPile = new ArrayList<>();
-        newDrawPile.addAll(drawingPile);
+        List<Card> newDrawPile = new ArrayList<>(); // REVIEW: new ArrayList<>(drawingPile) can be used
+        newDrawPile.addAll(drawingPile);            // instead of addAll()
         List<Card> oldDiscardPile = new ArrayList<>();
         oldDiscardPile.addAll(discardPile);
         Collections.shuffle(oldDiscardPile, new java.util.Random(1));

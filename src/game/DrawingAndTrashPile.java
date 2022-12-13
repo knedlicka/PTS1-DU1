@@ -28,7 +28,7 @@ public class DrawingAndTrashPile implements IDrawingAndTrashPile{
     }
 
     public List<Card> drawCards(int numberOfCardsToDraw) {
-        List<Card> draw = drawingStrategy.draw(this.drawingPile, this.discardPile, numberOfCardsToDraw, new java.util.Random());
-        return draw;
+        List<Card> draw = drawingStrategy.draw(this.drawingPile, this.discardPile, numberOfCardsToDraw, new java.util.Random()); //REVIEW: this variable can be omitted
+        return draw;                                                                                                             //draw() returned value can be directly returned
     }
 }

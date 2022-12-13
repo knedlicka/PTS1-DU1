@@ -31,7 +31,7 @@ public class Card {
         if (this.type != other.type) {
             return false;
         }
-        if (!Objects.equals(this.value, other.value)) {
+        if (!Objects.equals(this.value, other.value)) { //REVIEW: this if can be simplified
             return false;
         }
         return true;

@@ -15,7 +15,7 @@ public class AwokenQueens extends QueenCollection {
     public Map<IPosition, Queen> getQueens() {
         Map<IPosition, Queen> queenMap = new HashMap<>();
         for(int i = 0; i < queens.size(); i++) {
-            AwokenQueenPosition sleepingQueenPosition = new AwokenQueenPosition(i, playerIdx);
+            AwokenQueenPosition sleepingQueenPosition = new AwokenQueenPosition(i, playerIdx); // REVIEW: change the variable name to corresponding type
             queenMap.put(sleepingQueenPosition, queens.get(i));
         }
         return queenMap;

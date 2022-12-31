@@ -35,14 +35,14 @@ public class GameAdaptorTests {
     private void testPlay() {
         createGameAdaptor();
         String gameAdaptorResponse = gameAdaptor.play("player1", "h0 s1");
-        String expectedRespnse = "Optional[onTurn: 1\n" +
+        String expectedResponse = "Optional[onTurn: 1\n" +
                 "numberOfPlayers: 2\n" +
-                "sleepingQueens: [SleepingQueenPosition{cardIndex=1}, SleepingQueenPosition{cardIndex=3}, SleepingQueenPosition{cardIndex=2}, SleepingQueenPosition{cardIndex=0}]\n" +
-                "cards: {HandPosition{cardIndex=0, playerIndex=1}=Optional[Card{type=Knight, value=0}], HandPosition{cardIndex=1, playerIndex=1}=Optional[Card{type=Number, value=5}], HandPosition{cardIndex=0, playerIndex=0}=Optional[Card{type=Number, value=9}], HandPosition{cardIndex=1, playerIndex=0}=Optional[Card{type=Number, value=4}], HandPosition{cardIndex=0, playerIndex=4}=Optional[Card{type=Number, value=3}], HandPosition{cardIndex=0, playerIndex=2}=Optional[Card{type=Number, value=1}], HandPosition{cardIndex=0, playerIndex=3}=Optional[Card{type=Number, value=2}], HandPosition{cardIndex=1, playerIndex=2}=Optional[Card{type=Number, value=6}], HandPosition{cardIndex=1, playerIndex=3}=Optional[Card{type=Number, value=7}], HandPosition{cardIndex=1, playerIndex=4}=Optional[Card{type=Number, value=8}]}\n" +
-                "awokenQueens: {AwokenQueenPosition{cardIndex=0, playerIndex=0}=null}\n" +
+                "sleepingQueens: [SleepingQueenPosition{cardIndex=0}, SleepingQueenPosition{cardIndex=2}, SleepingQueenPosition{cardIndex=3}, SleepingQueenPosition{cardIndex=1}]\n" +
+                "cards: {HandPosition{cardIndex=0, playerIndex=3}=Optional[Card{type=Number, value=2}], HandPosition{cardIndex=1, playerIndex=4}=Optional[Card{type=Number, value=8}], HandPosition{cardIndex=0, playerIndex=2}=Optional[Card{type=Number, value=1}], HandPosition{cardIndex=1, playerIndex=3}=Optional[Card{type=Number, value=7}], HandPosition{cardIndex=0, playerIndex=4}=Optional[Card{type=Number, value=3}], HandPosition{cardIndex=1, playerIndex=0}=Optional[Card{type=Number, value=4}], HandPosition{cardIndex=1, playerIndex=1}=Optional[Card{type=Number, value=5}], HandPosition{cardIndex=0, playerIndex=0}=Optional[Card{type=Number, value=9}], HandPosition{cardIndex=1, playerIndex=2}=Optional[Card{type=Number, value=6}], HandPosition{cardIndex=0, playerIndex=1}=Optional[Card{type=Knight, value=0}]}\n" +
+                "awokenQueens: {AwokenQueenPosition{cardIndex=0, playerIndex=0}=Queen{points=3}}\n" +
                 "cardsDiscardedLastTurn: []\n" +
                 "]";
-        if(gameAdaptorResponse.equals(expectedRespnse)) {
+        if(gameAdaptorResponse.equals(expectedResponse)) {
             System.out.println("    [PASSED] testPlay");
         } else {
             System.err.println("    [FAILED] testPlay");

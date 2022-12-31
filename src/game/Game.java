@@ -88,8 +88,9 @@ public class Game implements IGame {
         }
         Map<AwokenQueenPosition, Queen> awokenQueens = new HashMap<>();
         for(IPlayer p: players) {
-            for(IPosition pos: p.getAwokenQueens().getQueens().keySet()) {
-                awokenQueens.put((AwokenQueenPosition) pos, p.getAwokenQueens().getQueens().get(pos));
+            IQueenCollection awokenQueensOfPlayer = p.getAwokenQueens();
+            for(Map.Entry<IPosition, Queen> entry: awokenQueensOfPlayer.getQueens().entrySet()) {
+                awokenQueens.put((AwokenQueenPosition) entry.getKey(), entry.getValue());
             }
         }
         return new GameState(

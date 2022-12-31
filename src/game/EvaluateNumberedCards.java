@@ -1,38 +1,25 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EvaluateNumberedCards implements IEvaluateNumberedCards{
     private final IHand hand;
-
 
     public EvaluateNumberedCards(IHand hand) {
         this.hand = hand;
     }
 
     private boolean canBeDiscarded(List<Card> cards) {
-        for(Card card : cards) {
-            if(!card.getType().equals(CardType.Number)) {
-                return false;
-            }
+        if(cards.stream().filter(card -> card.getType().equals(CardType.Number)).count() != cards.size()) {
+            return false;
         }
-
         if(cards.size() == 1) {
             return true;
         }
-
-        for (int i = 0; i < cards.size(); i++) {
-            int sum = 0;
-            for (int j = 0; j < cards.size(); j++) {
-                if (i != j) {
-                    sum += cards.get(j).getValue();
-                }
-            }
-            if (sum == cards.get(i).getValue()) {
-                return true;
-            }
-        }
-        return false;
+        List<Card> newList = new ArrayList<Card>(cards);
+        int sum = newList.stream().mapToInt(Card::getValue).sum();
+        return newList.stream().anyMatch(card -> sum - card.getValue() == card.getValue());
     }
 
     public boolean play(List<Card> cards, List<IPosition> handPositions) {
